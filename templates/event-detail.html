@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ seo.title | default: event.title }}</title><link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}"></head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="section">
+      <div class="container detail-hero">
+        <div class="detail-copy"><span class="eyebrow">{{ event.date }} {{ event.time }}</span><h1>{{ event.title }}</h1><div class="content-area">{{ event.description_html }}</div></div>
+        <img src="{{ event.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ event.title }}">
+      </div>
+    </section>
+    {% render 'sections/events.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/faqs.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+</body>
+</html>

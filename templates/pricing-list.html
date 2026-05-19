@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ seo.title | default: 'Pricing' }}</title><link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}"></head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero align-left"><div class="container"><span class="eyebrow">Pricing</span><h1>{{ page.title | default: 'Pricing Plans' }}</h1><p>{{ page.subheading }}</p></div></section>
+    {% render 'sections/pricing.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+</body>
+</html>

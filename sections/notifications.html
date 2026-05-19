@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container content-area">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.notifications.kicker | default: 'Notifications' }}</span>
+      <h2>{{ sections.notifications.title | default: 'Latest Notifications' }}</h2>
+      <p>{{ sections.notifications.description }}</p>
+    </div>
+    <div class="list-grid">
+      {% for item in notifications limit: section_controls.notifications.count %}
+        <a class="list-card" href="{{ item.url }}">
+          <h3>{{ item.title }}</h3>
+          <span class="text-link">Open Notice</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

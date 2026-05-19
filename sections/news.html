@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.news.kicker | default: 'News' }}</span>
+      <h2>{{ sections.news.title | default: 'Latest News' }}</h2>
+      <p>{{ sections.news.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.news.columns | default: 3 }}">
+      {% for item in news limit: section_controls.news.count %}
+        <article class="blog-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.title }}">
+          <div class="card-body">
+            <span class="eyebrow">{{ item.date }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <a class="text-link" href="{{ item.url }}">Read More</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

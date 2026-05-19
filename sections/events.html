@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.events.kicker | default: 'Events' }}</span>
+      <h2>{{ sections.events.title | default: 'Upcoming Events' }}</h2>
+      <p>{{ sections.events.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.events.columns | default: 3 }}">
+      {% for item in events limit: section_controls.events.count %}
+        <article class="blog-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.title }}">
+          <div class="card-body">
+            <span class="eyebrow">{{ item.date }} {{ item.time }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <a class="text-link" href="{{ item.url }}">View Event</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

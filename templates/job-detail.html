@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ seo.title | default: job.title }}</title><link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}"></head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="section">
+      <div class="container split-grid">
+        <article class="detail-copy">
+          <span class="eyebrow">{{ job.category }}</span>
+          <h1>{{ job.title }}</h1>
+          <p>{{ job.company }} · {{ job.location }} · {{ job.job_type }}</p>
+          <div class="content-area">{{ job.description_html }}</div>
+        </article>
+        <aside class="contact-panel">
+          <h2>Apply Now</h2>
+          <p>{{ job.experience }}</p>
+          {% render 'sections/contact-form.html', form: forms.contact %}
+        </aside>
+      </div>
+    </section>
+    {% render 'sections/jobs.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/faqs.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+</body>
+</html>

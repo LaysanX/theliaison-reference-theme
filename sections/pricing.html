@@ -1,0 +1,25 @@
+<section class="section muted-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.pricing.kicker | default: 'Pricing' }}</span>
+      <h2>{{ sections.pricing.title | default: 'Pricing Plans' }}</h2>
+      <p>{{ sections.pricing.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.pricing_plans.columns | default: 3 }}">
+      {% for plan in pricing_plans limit: section_controls.pricing_plans.count %}
+        <article class="pricing-card">
+          <img src="{{ plan.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ plan.title }}">
+          <div class="card-body">
+            <h3>{{ plan.title }}</h3>
+            <p>{{ plan.description }}</p>
+            <div class="price-row">
+              <strong>{{ plan.price }}</strong>
+              <span>{{ plan.validity }}</span>
+            </div>
+            <a class="btn btn-primary" href="{{ routes.contact | default: '/contact' }}">{{ plan.cta_text }}</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

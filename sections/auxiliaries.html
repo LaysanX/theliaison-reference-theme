@@ -1,0 +1,18 @@
+<section class="section muted-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.auxiliaries.kicker | default: 'More' }}</span>
+      <h2>{{ sections.auxiliaries.title | default: 'Additional Sections' }}</h2>
+      <p>{{ sections.auxiliaries.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.auxiliaries.columns | default: 3 }}">
+      {% for item in auxiliaries limit: section_controls.auxiliaries.count %}
+        <article class="feature-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.name }}">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.comment }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

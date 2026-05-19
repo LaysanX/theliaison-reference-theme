@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: site.name }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <meta name="keywords" content="{{ seo.keywords }}">
+  <link rel="canonical" href="{{ seo.canonical_url }}">
+  <meta property="og:title" content="{{ seo.title }}">
+  <meta property="og:description" content="{{ seo.description }}">
+  <meta property="og:image" content="{{ seo.image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ seo.image }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  {% render 'sections/hero.html', hero: home.hero %}
+
+  {% for block in home.section_order %}
+    {% case block %}
+      {% when 'services' %}
+        {% render 'sections/services.html' %}
+      {% when 'products' %}
+        {% render 'sections/products.html' %}
+      {% when 'projects' %}
+        {% render 'sections/projects.html' %}
+      {% when 'blogs' %}
+        {% render 'sections/blogs.html' %}
+      {% when 'news' %}
+        {% render 'sections/news.html' %}
+      {% when 'events' %}
+        {% render 'sections/events.html' %}
+      {% when 'gallery' %}
+        {% render 'sections/gallery.html' %}
+      {% when 'pricing' %}
+        {% render 'sections/pricing.html' %}
+      {% when 'pricingplans' %}
+        {% render 'sections/pricing.html' %}
+      {% when 'pricing plans' %}
+        {% render 'sections/pricing.html' %}
+      {% when 'jobs' %}
+        {% render 'sections/jobs.html' %}
+      {% when 'careers' %}
+        {% render 'sections/jobs.html' %}
+      {% when 'faq' %}
+        {% render 'sections/faqs.html' %}
+      {% when 'faqs' %}
+        {% render 'sections/faqs.html' %}
+      {% when 'notifications' %}
+        {% render 'sections/notifications.html' %}
+      {% when 'team' %}
+        {% render 'sections/team.html' %}
+      {% when 'testimonials' %}
+        {% render 'sections/testimonials.html' %}
+      {% when 'clients' %}
+        {% render 'sections/clients.html' %}
+      {% when 'partners' %}
+        {% render 'sections/partners.html' %}
+      {% when 'marketing' %}
+        {% render 'sections/marketing.html' %}
+      {% when 'trustbadges' %}
+        {% render 'sections/trust-badges.html' %}
+      {% when 'trust badges' %}
+        {% render 'sections/trust-badges.html' %}
+      {% when 'auxiliary' %}
+        {% render 'sections/auxiliaries.html' %}
+      {% when 'auxiliaries' %}
+        {% render 'sections/auxiliaries.html' %}
+      {% when 'custom_html' %}
+        {{ home.custom_html }}
+    {% endcase %}
+  {% endfor %}
+
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: page.title }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <meta name="keywords" content="{{ seo.keywords }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">{{ page.kicker }}</span>
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.subheading }}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container content-area">
+        {{ page.content }}
+        {{ page.custom_html }}
+      </div>
+    </section>
+    {% render 'sections/services.html' %}
+    {% render 'sections/products.html' %}
+    {% render 'sections/projects.html' %}
+    {% render 'sections/blogs.html' %}
+    {% render 'sections/gallery.html' %}
+    {% render 'sections/pricing.html' %}
+    {% render 'sections/faqs.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/trust-badges.html' %}
+    {% render 'sections/auxiliaries.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

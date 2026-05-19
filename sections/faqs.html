@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container content-area">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.faqs.kicker | default: 'FAQ' }}</span>
+      <h2>{{ sections.faqs.title | default: 'Frequently Asked Questions' }}</h2>
+      <p>{{ sections.faqs.description }}</p>
+    </div>
+    <div class="list-grid">
+      {% for item in faqs limit: section_controls.faqs.count %}
+        <article class="list-card">
+          <h3>{{ item.question }}</h3>
+          <p>{{ item.answer }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

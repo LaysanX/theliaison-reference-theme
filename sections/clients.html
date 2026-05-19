@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.clients.kicker | default: 'Clients' }}</span>
+      <h2>{{ sections.clients.title | default: 'Clients' }}</h2>
+      <p>{{ sections.clients.description }}</p>
+    </div>
+    <div class="logo-grid">
+      {% for item in clients limit: section_controls.clients.count %}
+        <a class="logo-card" href="{{ item.url }}">
+          <img src="{{ item.logo | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.name }}">
+          <span>{{ item.name }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

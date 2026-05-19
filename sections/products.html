@@ -1,0 +1,19 @@
+<section class="section muted-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.products.kicker | default: 'Products' }}</span>
+      <h2>{{ sections.products.title | default: 'Product Solutions' }}</h2>
+      <p>{{ sections.products.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.products.columns | default: 3 }}">
+      {% for product in products limit: section_controls.products.count %}
+        <article class="feature-card">
+          <img src="{{ product.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ product.title }}">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.short_description }}</p>
+          <a class="text-link" href="{{ product.url }}">View More</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

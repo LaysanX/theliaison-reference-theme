@@ -1,0 +1,16 @@
+<section class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">{{ hero.kicker }}</span>
+      <h1>{{ hero.title | default: site.tagline }}</h1>
+      <p>{{ hero.description }}</p>
+      <div class="button-row">
+        <a class="btn btn-primary" href="{{ hero.primary_url }}">{{ hero.primary_text | default: 'Get Started' }}</a>
+        <a class="btn btn-secondary" href="{{ hero.secondary_url }}">{{ hero.secondary_text | default: 'View Services' }}</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="{{ hero.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ hero.title }}">
+    </div>
+  </div>
+</section>

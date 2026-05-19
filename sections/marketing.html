@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.marketing.kicker | default: 'Highlights' }}</span>
+      <h2>{{ sections.marketing.title | default: 'Marketing Sections' }}</h2>
+      <p>{{ sections.marketing.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.marketing.columns | default: 3 }}">
+      {% for item in marketing_sections limit: section_controls.marketing.count %}
+        <article class="feature-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.title }}">
+          <span class="eyebrow">{{ item.type }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+          {% if item.cta_url %}
+            <a class="text-link" href="{{ item.cta_url }}">{{ item.cta_text | default: 'View More' }}</a>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

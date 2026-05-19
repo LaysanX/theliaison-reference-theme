@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'Contact' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero align-left">
+      <div class="container">
+        <span class="eyebrow">{{ contact.kicker | default: 'Contact Us' }}</span>
+        <h1>{{ contact.heading }}</h1>
+        <p>{{ contact.subheading }}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container split-grid">
+        <div>
+          <h2>{{ contact.left_heading }}</h2>
+          <p>{{ contact.left_subheading }}</p>
+          {% render 'sections/contact-form.html', form: forms.contact %}
+        </div>
+        <aside class="contact-panel">
+          <h2>{{ contact.right_heading }}</h2>
+          <p>{{ contact.right_subheading }}</p>
+          <p>{{ site.email }}</p>
+          <p>{{ site.phone }}</p>
+          <p>{{ site.hours }}</p>
+          <div class="social-links">
+            {% for social in site.social_links %}
+              <a href="{{ social.url }}" aria-label="{{ social.label }}">{{ social.icon }}</a>
+            {% endfor %}
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

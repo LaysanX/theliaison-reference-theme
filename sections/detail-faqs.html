@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container content-area">
+    <div class="section-head">
+      <span class="eyebrow">FAQs</span>
+      <h2>{{ title | default: 'Questions teams usually ask' }}</h2>
+    </div>
+    <div class="list-grid">
+      {% for item in items %}
+        <article class="list-card">
+          <h3>{{ item.question }}</h3>
+          <p>{{ item.answer }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

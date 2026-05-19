@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: blog.title }}</title>
+  <meta name="description" content="{{ seo.description | default: blog.excerpt }}">
+  <meta property="og:image" content="{{ blog.image }}">
+  <meta name="twitter:image" content="{{ blog.image }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <article class="section">
+      <div class="container article-layout">
+        <img class="article-image" src="{{ blog.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ blog.title }}">
+        <span class="eyebrow">{{ blog.category }}</span>
+        <h1>{{ blog.title }}</h1>
+        <p>{{ blog.published_date }} by {{ blog.author }}</p>
+        <div class="share-links">
+          <a href="{{ blog.share.facebook }}">Facebook</a>
+          <a href="{{ blog.share.linkedin }}">LinkedIn</a>
+          <a href="{{ blog.share.twitter }}">Twitter</a>
+        </div>
+        <div class="content-area">{{ blog.content_html }}</div>
+      </div>
+    </article>
+    {% render 'sections/blogs.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/faqs.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

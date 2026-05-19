@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: project.title }}</title>
+  <meta name="description" content="{{ seo.description | default: project.short_description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="section">
+      <div class="container detail-hero">
+        <div class="detail-copy">
+          <span class="eyebrow">Project Detail</span>
+          <h1>{{ project.title }}</h1>
+          <p>{{ project.short_description }}</p>
+        </div>
+        <img src="{{ project.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ project.title }}">
+      </div>
+    </section>
+    <section class="section muted-section">
+      <div class="container content-area">
+        {{ project.description_html }}
+        {{ project.custom_html }}
+      </div>
+    </section>
+    {% render 'sections/detail-faqs.html', items: project.faqs %}
+    <section class="section">
+      <div class="container">
+        <div class="card-grid columns-3">
+          {% for field in custom_fields %}
+            <article class="list-card"><strong>{{ field.label }}</strong><p>{{ field.value }}</p></article>
+          {% endfor %}
+          {% for feature in feature_blocks %}
+            <article class="feature-card"><img src="{{ feature.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ feature.title }}"><h3>{{ feature.title }}</h3><p>{{ feature.description }}</p></article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <section class="section muted-section">
+      <div class="container split-grid">
+        <div class="contact-panel">{% render 'sections/contact-form.html', form: forms.contact %}</div>
+        <div class="contact-panel"><h3>{{ assigned_pricing_plan.title }}</h3><p>{{ assigned_pricing_plan.description }}</p><strong>{{ assigned_pricing_plan.price }}</strong></div>
+      </div>
+    </section>
+    {% render 'sections/related-projects.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/trust-badges.html' %}
+    {% render 'sections/auxiliaries.html' %}
+    {% render 'sections/faqs.html' %}
+    {% render 'sections/gallery.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

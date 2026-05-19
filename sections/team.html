@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.team.kicker | default: 'Team' }}</span>
+      <h2>{{ sections.team.title | default: 'Our Team' }}</h2>
+      <p>{{ sections.team.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.team.columns | default: 3 }}">
+      {% for member in team limit: section_controls.team.count %}
+        <article class="feature-card">
+          <img src="{{ member.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ member.name }}">
+          <h3>{{ member.name }}</h3>
+          <p>{{ member.designation }}</p>
+          <p>{{ member.email }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

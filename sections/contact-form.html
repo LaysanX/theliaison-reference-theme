@@ -1,0 +1,20 @@
+<form class="dynamic-form" method="post" action="{{ form.submit_url }}" enctype="multipart/form-data" data-dynamic-form>
+  <h3>{{ form.heading | default: form.name }}</h3>
+  {% if form.subheading %}
+    <p>{{ form.subheading }}</p>
+  {% endif %}
+
+  {% for field in form.fields %}
+    <label>
+      <span>{{ field.label }}{% if field.required %}*{% endif %}</span>
+      {{ field.input_html }}
+    </label>
+  {% endfor %}
+
+  {% if form.captcha_enabled %}
+    {{ form.captcha_html }}
+  {% endif %}
+
+  <button class="btn btn-primary" type="submit">{{ form.cta_text | default: 'Submit' }}</button>
+  <p class="form-status" data-form-status></p>
+</form>

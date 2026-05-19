@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ seo.title | default: custom_section_item.title }}</title><link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}"></head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="section">
+      <div class="container detail-hero">
+        <div class="detail-copy">
+          <span class="eyebrow">{{ custom_section.name }}</span>
+          <h1>{{ custom_section_item.title }}</h1>
+          <p>{{ custom_section_item.short_description }}</p>
+        </div>
+        <img src="{{ custom_section_item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ custom_section_item.title }}">
+      </div>
+    </section>
+    <section class="section muted-section">
+      <div class="container">
+        <div class="content-area">{{ custom_section_item.description_html }}</div>
+        <div class="card-grid columns-3">
+          {% for field in custom_section_fields %}
+            <article class="list-card"><strong>{{ field.label }}</strong><p>{{ field.value }}</p></article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/faqs.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,27 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <img class="footer-logo" src="{{ site.logo }}" alt="{{ site.name }}">
+      <p>{{ site.footer.about }}</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul class="footer-menu">
+        {% for item in menus.footer %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>{{ site.email }}</p>
+      <p>{{ site.phone }}</p>
+      <p>{{ site.address }}</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">{{ site.footer.copyright }}</div>
+  </div>
+</footer>

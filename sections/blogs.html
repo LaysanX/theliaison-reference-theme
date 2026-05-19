@@ -1,0 +1,21 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.blogs.kicker | default: 'Insights' }}</span>
+      <h2>{{ sections.blogs.title | default: 'Latest Blogs' }}</h2>
+    </div>
+    <div class="card-grid columns-{{ section_controls.blogs.columns | default: 3 }}">
+      {% for blog in blogs limit: section_controls.blogs.count %}
+        <article class="blog-card">
+          <img src="{{ blog.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ blog.title }}">
+          <div class="card-body">
+            <span>{{ blog.published_date }}</span>
+            <h3>{{ blog.title }}</h3>
+            <p>{{ blog.excerpt }}</p>
+            <a class="text-link" href="{{ blog.url }}">Read More</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

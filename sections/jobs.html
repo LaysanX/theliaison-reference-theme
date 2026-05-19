@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.jobs.kicker | default: 'Careers' }}</span>
+      <h2>{{ sections.jobs.title | default: 'Open Positions' }}</h2>
+      <p>{{ sections.jobs.description }}</p>
+    </div>
+    <div class="list-grid">
+      {% for job in jobs limit: section_controls.jobs.count %}
+        <article class="list-card">
+          <span class="eyebrow">{{ job.category }}</span>
+          <h3>{{ job.title }}</h3>
+          <p>{{ job.company }} · {{ job.location }} · {{ job.job_type }}</p>
+          <a class="text-link" href="{{ job.url }}">View Job</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

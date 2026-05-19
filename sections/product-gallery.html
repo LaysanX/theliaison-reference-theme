@@ -1,0 +1,12 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Gallery</span><h2>Product Visuals</h2></div>
+    <div class="card-grid columns-3">
+      {% for item in product.gallery %}
+        <article class="gallery-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.title }}">
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

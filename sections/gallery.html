@@ -1,0 +1,20 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{{ sections.gallery.kicker | default: 'Gallery' }}</span>
+      <h2>{{ sections.gallery.title | default: 'Gallery' }}</h2>
+      <p>{{ sections.gallery.description }}</p>
+    </div>
+    <div class="card-grid columns-{{ section_controls.gallery.columns | default: 3 }}">
+      {% for item in gallery limit: section_controls.gallery.count %}
+        <article class="gallery-card">
+          <img src="{{ item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ item.title }}">
+          <div class="card-body">
+            <span class="eyebrow">{{ item.category }}</span>
+            <h3>{{ item.title }}</h3>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

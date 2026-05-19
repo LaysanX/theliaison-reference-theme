@@ -1,0 +1,42 @@
+<header class="site-header">
+  {% if site.topbar.enabled %}
+    <div class="topbar">
+      <div class="container topbar-grid">
+        <div>{{ site.topbar.left_html }}</div>
+        <div class="social-links">
+          {% for social in site.social_links %}
+            <a href="{{ social.url }}" aria-label="{{ social.label }}">{{ social.icon }}</a>
+          {% endfor %}
+        </div>
+        <div>{{ site.topbar.right_html }}</div>
+      </div>
+    </div>
+  {% endif %}
+
+  <nav class="navbar">
+    <div class="container nav-grid">
+      <a class="brand" href="{{ routes.home }}">
+        <img src="{{ site.logo }}" alt="{{ site.name }}">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" data-menu>
+        {% for item in menus.header %}
+          <li class="{% if item.children.size > 0 %}has-dropdown{% endif %}">
+            <a href="{{ item.url }}">{{ item.title }}</a>
+            {% if item.children.size > 0 %}
+              <ul class="dropdown {% if item.children.size > 10 %}dropdown-two-column{% endif %}">
+                {% for child in item.children %}
+                  <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</header>

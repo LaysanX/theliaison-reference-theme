@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: news_item.title }}</title>
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="section">
+      <div class="container detail-hero">
+        <div class="detail-copy">
+          <span class="eyebrow">{{ news_item.date }}</span>
+          <h1>{{ news_item.title }}</h1>
+          <div class="content-area">{{ news_item.description_html }}</div>
+        </div>
+        <img src="{{ news_item.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ news_item.title }}">
+      </div>
+    </section>
+    {% render 'sections/news.html' %}
+    {% render 'sections/marketing.html' %}
+    {% render 'sections/testimonials.html' %}
+    {% render 'sections/clients.html' %}
+    {% render 'sections/partners.html' %}
+    {% render 'sections/faqs.html' %}
+  </main>
+  {% render 'sections/footer.html' %}
+</body>
+</html>

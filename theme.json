@@ -1,0 +1,66 @@
+{
+  "name": "TheLiaison Reference Theme",
+  "handle": "theliaison-reference",
+  "version": "1.0.0",
+  "author": "LaysanX",
+  "engine": "laysanx-liquid-html",
+  "repository": "https://github.com/laysanx/theliaison-reference-theme",
+  "cloneUrl": "https://github.com/laysanx/theliaison-reference-theme.git",
+  "description": "Designer starter theme for LaysanX client websites. Built with normal HTML, CSS, JavaScript, and Liquid-style placeholders.",
+  "requiredTemplates": [
+    "templates/home.html",
+    "templates/page.html",
+    "templates/contact.html",
+    "templates/service-list.html",
+    "templates/service-detail.html",
+    "templates/product-list.html",
+    "templates/product-detail.html",
+    "templates/project-list.html",
+    "templates/project-detail.html",
+    "templates/blog-list.html",
+    "templates/blog-detail.html",
+    "templates/news-list.html",
+    "templates/news-detail.html",
+    "templates/notification-list.html",
+    "templates/event-list.html",
+    "templates/event-detail.html",
+    "templates/gallery.html",
+    "templates/faq-list.html",
+    "templates/pricing-list.html",
+    "templates/job-list.html",
+    "templates/job-detail.html",
+    "templates/team-list.html",
+    "templates/custom-section-detail.html"
+  ],
+  "assets": {
+    "css": [
+      "assets/css/style.css"
+    ],
+    "js": [
+      "assets/js/main.js"
+    ],
+    "images": [
+      "assets/images/placeholder.svg"
+    ]
+  },
+  "settings": [
+    {
+      "key": "primary_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#0f766e"
+    },
+    {
+      "key": "secondary_color",
+      "label": "Secondary color",
+      "type": "color",
+      "default": "#2563eb"
+    },
+    {
+      "key": "button_radius",
+      "label": "Button radius",
+      "type": "text",
+      "default": "10px"
+    }
+  ]
+}
