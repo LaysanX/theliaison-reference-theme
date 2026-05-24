@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'Wishlist' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero"><div class="container"><span class="eyebrow">Wishlist</span><h1>Keep favorites close.</h1></div></section>
+    <section class="section">
+      <div class="container account-layout">
+        <aside class="commerce-card account-sidebar">
+          <a class="account-nav-link" href="{{ ecommerce.urls.account }}">Dashboard</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.customer_orders }}">My Orders</a>
+          <a class="account-nav-link is-active" href="{{ ecommerce.urls.wishlist }}">Wishlist</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.addresses }}">Address</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.profile }}">My Profile</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.change_password }}">Change Password</a>
+          <a class="account-nav-link danger" href="{{ ecommerce.urls.logout }}">Logout</a>
+        </aside>
+        <div class="account-content commerce-grid-cards">
+          {% for item in wishlist.items %}
+            <article class="commerce-card commerce-product-card">
+              <img src="{{ item.image }}" alt="{{ item.title }}">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.short_description }}</p>
+              <strong>{{ item.price_formatted }}</strong>
+              <div class="commerce-inline-actions">
+                <a class="btn btn-outline" href="{{ item.url }}">View</a>
+                <form method="post" action="{{ item.move_to_cart_url }}">
+                  {{ forms.antiforgery_field }}
+                  <input type="hidden" name="productId" value="{{ item.id }}">
+                  <button class="btn btn-primary" type="submit">Move to Cart</button>
+                </form>
+                <form method="post" action="{{ item.remove_url }}">
+                  {{ forms.antiforgery_field }}
+                  <input type="hidden" name="productId" value="{{ item.id }}">
+                  <button class="btn btn-outline danger" type="submit">Remove</button>
+                </form>
+              </div>
+            </article>
+          {% endfor %}
+          {% if wishlist.items == empty %}<div class="commerce-card"><p>No wishlist items yet.</p></div>{% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

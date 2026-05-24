@@ -1,4 +1,4 @@
-<section class="hero-section">
+<section class="hero-section slider-layout-{{ settings.slider_layout_type | default: hero.layout_type | default: 'text-left-slider-right' }}">
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{{ hero.kicker }}</span>

@@ -1,59 +1,101 @@
-# TheLiaison Reference Theme
+# TheLiaison Master Reference Theme
 
-This package is the official LaysanX starter theme for designers. It is normal HTML, CSS, and JavaScript with Liquid-style placeholders for dynamic website data.
+This package is the official master reference for LaysanX designers building uploaded HTML, CSS, and JavaScript themes. It is meant to show the current uploaded-theme runtime surface area clearly, including website pages, ecommerce flows, product collections, customer account pages, and shared section patterns.
 
-## Designer Workflow
+## What This Package Is For
 
-1. Download this reference theme or clone it from Git.
-2. Edit normal HTML, CSS, and JavaScript.
-3. Keep the required placeholders and loops.
-4. Zip the theme folder.
-5. Upload it in Client Admin theme customization.
-6. Preview it.
-7. Publish it.
+Use this package when a designer needs to:
 
-## Clone From Git
+1. start from a complete LaysanX-compatible theme structure
+2. understand which public pages can be themed today
+3. keep the required Liquid-like placeholders and objects intact
+4. build a custom branded design without touching .NET code
 
-```bash
-git clone https://github.com/laysanx/theliaison-reference-theme.git
+This package is also the design reference used by:
+
+- uploaded custom themes
+- AI Website Builder output shape
+- AI Theme Helper file targeting
+
+## Quick Workflow
+
+1. Download this reference theme or clone it.
+2. Edit HTML in `templates/` and `sections/`.
+3. Edit CSS in `assets/css/style.css`.
+4. Edit JavaScript in `assets/js/main.js`.
+5. Keep the object names, loops, route links, and antiforgery placeholders intact.
+6. Zip the theme folder.
+7. Upload it in Client Admin > Appearance & Themes.
+8. Preview and publish it.
+
+## Reference Docs In This Package
+
+- `docs/feature-coverage.md`: high-level LaysanX feature coverage from the designer point of view
+- `docs/template-map.md`: template-to-route map
+- `docs/data-objects.md`: available data objects and common placeholders
+- `docs/platform-surfaces.md`: public/platform surfaces not currently implemented as uploaded templates
+- `docs/design-patterns.md`: visual composition guide for hero, listings, product detail, collections, cart, checkout, and account pages
+
+## Package Structure
+
+```txt
+theliaison-reference-theme/
+  theme.json
+  README.md
+  docs/
+    feature-coverage.md
+    template-map.md
+    data-objects.md
+    platform-surfaces.md
+  templates/
+  sections/
+  assets/
 ```
 
-Public repository:
+## Current Uploaded-Theme Coverage
 
-`https://github.com/laysanx/theliaison-reference-theme`
+This package includes reference templates for:
 
-## What Designers Can Edit
+- Homepage and dynamic pages
+- Services, products, projects, blogs, news, events, jobs, gallery, FAQs, notifications, pricing, and team pages
+- Product collections through `templates/product-list.html`
+- Cart, checkout, order success, order lookup, and returns
+- Customer account, addresses, orders, wishlist, profile, and change-password
 
-- HTML templates in `templates/`
-- Reusable HTML blocks in `sections/`
-- CSS in `assets/css/`
-- JavaScript in `assets/js/`
-- Images, fonts, and icons in `assets/images/`
+## Platform Routes Still Outside Uploaded Templates
 
-## What Is Not Allowed
+LaysanX still uses platform-managed pages for some customer auth routes:
 
-- `.cshtml`, `.cs`, `.dll`, `.exe`, `.php`, `.py`, `.sh`
-- Server-side code
-- Absolute server paths
-- External scripts that collect sensitive user data without consent
+- login
+- register
+- forgot password
+- reset password
+- logout redirect flow
 
-## Required Placeholders
+Those URLs are still exposed to themes through `ecommerce.urls.*`, but they do not currently have local template files in this package.
 
-Keep these placeholders when creating a theme:
+## Keep These Placeholders
 
 ```liquid
 {{ site.name }}
 {{ site.logo }}
-{{ page.title }}
-{{ page.content }}
+{{ seo.title }}
+{{ seo.description }}
 {{ settings.primary_color }}
-{{ asset_url: 'assets/css/style.css' }}
+{{ routes.home }}
+{{ forms.antiforgery_field }}
+{{ 'assets/css/style.css' | asset_url }}
+{{ 'assets/js/main.js' | asset_url }}
 ```
 
-Use loops for repeated content:
+## Example Loops
 
 ```liquid
-{% for service in services %}
+{% for item in menus.header %}
+  <a href="{{ item.url }}">{{ item.title }}</a>
+{% endfor %}
+
+{% for service in services limit: section_controls.services.count %}
   <article>
     <img src="{{ service.image }}" alt="{{ service.title }}">
     <h3>{{ service.title }}</h3>
@@ -61,53 +103,62 @@ Use loops for repeated content:
     <a href="{{ service.url }}">View More</a>
   </article>
 {% endfor %}
+
+{% for product in listing_products %}
+  <article>
+    <img src="{{ product.image }}" alt="{{ product.title }}">
+    <h3>{{ product.title }}</h3>
+    <strong>{{ product.primary_price_formatted }}</strong>
+  </article>
+{% endfor %}
 ```
 
-## Required Templates
+## Forms
 
-- `templates/home.html`
-- `templates/page.html`
-- `templates/contact.html`
-- `templates/service-list.html`
-- `templates/service-detail.html`
-- `templates/product-list.html`
-- `templates/product-detail.html`
-- `templates/project-list.html`
-- `templates/project-detail.html`
-- `templates/blog-list.html`
-- `templates/blog-detail.html`
-- `templates/news-list.html`
-- `templates/news-detail.html`
-- `templates/notification-list.html`
-- `templates/event-list.html`
-- `templates/event-detail.html`
-- `templates/gallery.html`
-- `templates/faq-list.html`
-- `templates/pricing-list.html`
-- `templates/job-list.html`
-- `templates/job-detail.html`
-- `templates/team-list.html`
-- `templates/custom-section-detail.html`
-
-## Common Data Objects
-
-- `site`: logo, name, tagline, social links, contact details, footer text
-- `menus`: header and footer navigation
-- `page`: current page title, content, image, SEO metadata
-- `services`, `products`, `projects`, `blogs`, `news`, `events`, `jobs`: public content lists
-- `notifications`, `pricing_plans`, `team`, `testimonials`, `gallery`, `faqs`, `partners`, `clients`: reusable website modules
-- `marketing_sections`, `trust_badges`, `auxiliaries`: marketing and auxiliary website modules
-- `service.faqs`, `product.faqs`, `product.gallery`, `related_services`, `related_products`, `related_projects`: detail-page modules
-- `custom_section`, `custom_section_item`, `custom_section_fields`: custom section detail pages
-- `forms`: assigned dynamic forms
-- `section_controls`: per-page columns, rows, item count, and sort order
-
-## Form Rendering
-
-Use the assigned form object instead of hard-coding fields:
+Do not hard-code dynamic contact form fields. Use the assigned form renderer:
 
 ```liquid
 {% render 'sections/contact-form.html', form: forms.contact %}
 ```
 
-The platform will render fields, required markers, captcha, and submit button text.
+For posted forms like cart, checkout, wishlist actions, customer profile, and address forms, keep:
+
+```liquid
+{{ forms.antiforgery_field }}
+```
+
+## Commerce Notes
+
+- Product listing and collection pages share `templates/product-list.html`.
+- Product detail supports product gallery, variants, variant swatches, formatted pricing, compare-at pricing, and related products.
+- Currency switching should only be shown when `ecommerce.enabled` is true.
+- Clients can choose later whether commerce/account routes use the uploaded theme or LaysanX platform pages, but designers should still build complete theme templates for those surfaces.
+
+## Safe Edits
+
+Designers can freely change:
+
+- layout
+- spacing
+- typography
+- colors
+- section composition
+- images
+- card styles
+- interaction styling
+
+Designers should preserve:
+
+- template file names
+- section file names
+- route variables
+- object keys
+- loops
+- form action URLs
+- antiforgery fields
+
+## Repository
+
+```bash
+git clone https://github.com/laysanx/theliaison-reference-theme.git
+```

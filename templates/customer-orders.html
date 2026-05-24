@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'My Orders' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero"><div class="container"><span class="eyebrow">Orders</span><h1>Track every order and sub-order.</h1></div></section>
+    <section class="section">
+      <div class="container account-layout">
+        <aside class="commerce-card account-sidebar">
+          <a class="account-nav-link" href="{{ ecommerce.urls.account }}">Dashboard</a>
+          <a class="account-nav-link is-active" href="{{ ecommerce.urls.customer_orders }}">My Orders</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.wishlist }}">Wishlist</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.addresses }}">Address</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.profile }}">My Profile</a>
+          <a class="account-nav-link" href="{{ ecommerce.urls.change_password }}">Change Password</a>
+          <a class="account-nav-link danger" href="{{ ecommerce.urls.logout }}">Logout</a>
+        </aside>
+        <div class="account-content commerce-stack">
+          {% for order in customer_orders %}
+            <article class="commerce-card">
+              <div class="commerce-summary-row"><span>{{ order.order_number }}</span><strong>{{ order.grand_total_formatted }}</strong></div>
+              <div class="commerce-meta-row"><span>{{ order.status }}</span><span>{{ order.payment_status }}</span><span>{{ order.fulfillment_status }}</span></div>
+              {% for item in order.items %}
+                <div class="commerce-summary-line"><div><strong>{{ item.product_title }}</strong>{% if item.variant_title %}<p>{{ item.variant_title }}</p>{% endif %}</div><strong>{{ item.line_total_formatted }}</strong></div>
+              {% endfor %}
+              <form method="post" action="{{ order.reorder_url }}" class="commerce-inline-form">
+                {{ forms.antiforgery_field }}
+                <input type="hidden" name="orderId" value="{{ order.id }}">
+                <button class="btn btn-outline" type="submit">Reorder</button>
+              </form>
+            </article>
+          {% endfor %}
+          {% if customer_orders == empty %}<div class="commerce-card"><p>No orders yet.</p></div>{% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

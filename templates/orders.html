@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'Track Order' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero"><div class="container"><span class="eyebrow">Order Lookup</span><h1>Find your order details.</h1></div></section>
+    <section class="section">
+      <div class="container commerce-shell">
+        <form class="commerce-card commerce-form-panel" method="post" action="{{ order_lookup.lookup_url }}">
+          {{ forms.antiforgery_field }}
+          <div class="commerce-grid">
+            <label><span>Order ID</span><input type="text" name="OrderNumber" value="{{ order_lookup.order_number }}"></label>
+            <label><span>Email</span><input type="email" name="CustomerEmail" value="{{ order_lookup.customer_email }}"></label>
+          </div>
+          <button class="btn btn-primary" type="submit">Track Order</button>
+        </form>
+        {% if order_lookup.result %}
+          <div class="commerce-card">
+            <div class="commerce-summary-row"><span>Order</span><strong>{{ order_lookup.result.order_number }}</strong></div>
+            <div class="commerce-summary-row"><span>Status</span><strong>{{ order_lookup.result.status }}</strong></div>
+            <div class="commerce-summary-row"><span>Payment</span><strong>{{ order_lookup.result.payment_status }}</strong></div>
+            <div class="commerce-summary-row"><span>Fulfillment</span><strong>{{ order_lookup.result.fulfillment_status }}</strong></div>
+            <div class="commerce-summary-row total"><span>Total</span><strong>{{ order_lookup.result.grand_total_formatted }}</strong></div>
+            {% for item in order_lookup.result.items %}
+              <div class="commerce-summary-line"><div><strong>{{ item.product_title }}</strong>{% if item.variant_title %}<p>{{ item.variant_title }}</p>{% endif %}</div><strong>{{ item.line_total_formatted }}</strong></div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

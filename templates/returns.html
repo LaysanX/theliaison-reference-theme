@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'Returns' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero"><div class="container"><span class="eyebrow">Returns</span><h1>Submit a return request.</h1></div></section>
+    <section class="section">
+      <div class="container commerce-shell">
+        <form class="commerce-card commerce-form-panel" method="post" action="{{ returns.submit_url }}">
+          {{ forms.antiforgery_field }}
+          <input type="hidden" name="Input.OrderId" value="{{ returns.input.order_id }}">
+          <input type="hidden" name="Input.OrderItemId" value="{{ returns.input.order_item_id }}">
+          <label><span>Email</span><input type="email" name="Input.CustomerEmail" value="{{ returns.input.customer_email }}"></label>
+          <label><span>Reason</span><textarea name="Input.Reason" rows="4">{{ returns.input.reason }}</textarea></label>
+          <label><span>Remarks</span><textarea name="Input.Remarks" rows="3">{{ returns.input.remarks }}</textarea></label>
+          <button class="btn btn-primary" type="submit">Submit Return</button>
+        </form>
+        {% if returns.order %}
+          <div class="commerce-card">
+            <h2>{{ returns.order.order_number }}</h2>
+            {% for item in returns.order.items %}
+              <div class="commerce-summary-line"><div><strong>{{ item.product_title }}</strong>{% if item.variant_title %}<p>{{ item.variant_title }}</p>{% endif %}</div><span>Qty {{ item.quantity }}</span></div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ site.language | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.title | default: 'Cart' }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="stylesheet" href="/frontend-assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | asset_url }}">
+</head>
+<body>
+  {% render 'sections/header.html' %}
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Your Cart</span>
+        <h1>Review your items before checkout.</h1>
+        <p>{{ cart.item_count }} item(s) ready for delivery.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container commerce-shell commerce-shell-cart">
+        <div class="commerce-main">
+          {% if cart.items.size > 0 %}
+            {% for item in cart.items %}
+              <article class="commerce-card commerce-line">
+                <img src="{{ item.image }}" alt="{{ item.product_title }}">
+                <div class="commerce-line-copy">
+                  <h3>{{ item.product_title }}</h3>
+                  {% if item.variant_title %}<p>{{ item.variant_title }}</p>{% endif %}
+                  <div class="commerce-line-meta">{{ item.unit_price_formatted }} each</div>
+                </div>
+                <form method="post" action="{{ item.update_url }}" class="commerce-inline-form">
+                  {{ forms.antiforgery_field }}
+                  <input type="hidden" name="itemId" value="{{ item.id }}">
+                  <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                  <button class="btn btn-outline" type="submit">Update</button>
+                </form>
+                <strong>{{ item.line_total_formatted }}</strong>
+                <form method="post" action="{{ item.remove_url }}" class="commerce-inline-form">
+                  {{ forms.antiforgery_field }}
+                  <input type="hidden" name="itemId" value="{{ item.id }}">
+                  <button class="btn btn-outline danger" type="submit">Remove</button>
+                </form>
+              </article>
+            {% endfor %}
+          {% else %}
+            <div class="commerce-card commerce-empty-state">
+              <h2>Your cart is empty.</h2>
+              <p>Browse products and add the items you want to order.</p>
+              <a class="btn btn-primary" href="{{ routes.products }}">Continue Shopping</a>
+            </div>
+          {% endif %}
+        </div>
+        <aside class="commerce-card commerce-summary">
+          <span class="eyebrow">Summary</span>
+          <div class="commerce-summary-row"><span>Subtotal</span><strong>{{ cart.subtotal_formatted }}</strong></div>
+          <div class="commerce-summary-row"><span>Shipping</span><strong>{{ cart.shipping_amount_formatted }}</strong></div>
+          <div class="commerce-summary-row"><span>Tax</span><strong>{{ cart.tax_amount_formatted }}</strong></div>
+          {% if cart.discount_amount != '0' %}<div class="commerce-summary-row"><span>Discount</span><strong>-{{ cart.discount_amount_formatted }}</strong></div>{% endif %}
+          {% if cart.payment_fee_amount != '0' %}<div class="commerce-summary-row"><span>Payment Fee</span><strong>{{ cart.payment_fee_amount_formatted }}</strong></div>{% endif %}
+          <div class="commerce-summary-row total"><span>Total</span><strong>{{ cart.grand_total_formatted }}</strong></div>
+          <a class="btn btn-primary btn-block" href="{{ ecommerce.urls.checkout }}">Proceed to Checkout</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+  {% render 'sections/footer.html' %}
+  <script src="{{ 'assets/js/main.js' | asset_url }}" defer></script>
+</body>
+</html>

@@ -13,10 +13,14 @@
             <h3>{{ plan.title }}</h3>
             <p>{{ plan.description }}</p>
             <div class="price-row">
-              <strong>{{ plan.price }}</strong>
+              <strong>{{ plan.primary_price_formatted | default: plan.selling_price_formatted | default: plan.price_formatted | default: plan.primary_price | default: plan.selling_price | default: plan.price }}</strong>
               <span>{{ plan.validity }}</span>
             </div>
-            <a class="btn btn-primary" href="{{ routes.contact | default: '/contact' }}">{{ plan.cta_text }}</a>
+            {% if ecommerce.enabled %}
+              <a class="btn btn-primary" href="{{ plan.checkout_url | default: plan.checkoutUrl | default: plan.direct_checkout_url | default: plan.directCheckoutUrl }}">{{ plan.cta_text | default: 'Buy Now' }}</a>
+            {% else %}
+              <a class="btn btn-primary" href="{{ routes.contact | default: '/contact' }}">{{ plan.cta_text | default: 'Contact Us' }}</a>
+            {% endif %}
           </div>
         </article>
       {% endfor %}

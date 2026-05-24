@@ -1,12 +1,12 @@
 {
   "name": "TheLiaison Reference Theme",
   "handle": "theliaison-reference",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "LaysanX",
   "engine": "laysanx-liquid-html",
   "repository": "https://github.com/laysanx/theliaison-reference-theme",
   "cloneUrl": "https://github.com/laysanx/theliaison-reference-theme.git",
-  "description": "Designer starter theme for LaysanX client websites. Built with normal HTML, CSS, JavaScript, and Liquid-style placeholders.",
+  "description": "Complete LaysanX master reference theme for designers, covering the current uploaded-theme runtime for website, commerce, collections, checkout, order success, and customer account surfaces.",
   "requiredTemplates": [
     "templates/home.html",
     "templates/page.html",
@@ -30,7 +30,18 @@
     "templates/job-list.html",
     "templates/job-detail.html",
     "templates/team-list.html",
-    "templates/custom-section-detail.html"
+    "templates/custom-section-detail.html",
+    "templates/cart.html",
+    "templates/checkout.html",
+    "templates/order-success.html",
+    "templates/orders.html",
+    "templates/returns.html",
+    "templates/customer-account.html",
+    "templates/customer-addresses.html",
+    "templates/customer-orders.html",
+    "templates/customer-wishlist.html",
+    "templates/customer-profile.html",
+    "templates/customer-change-password.html"
   ],
   "assets": {
     "css": [
@@ -61,6 +72,86 @@
       "label": "Button radius",
       "type": "text",
       "default": "10px"
+    },
+    {
+      "key": "body_font_family",
+      "label": "Body font family",
+      "type": "text",
+      "default": "Inter, system-ui, sans-serif"
+    },
+    {
+      "key": "heading_font_family",
+      "label": "Heading font family",
+      "type": "text",
+      "default": "Inter, system-ui, sans-serif"
+    },
+    {
+      "key": "body_font_size",
+      "label": "Body font size",
+      "type": "number",
+      "default": 16
+    },
+    {
+      "key": "heading_font_size",
+      "label": "Heading font size",
+      "type": "number",
+      "default": 48
+    },
+    {
+      "key": "subheading_font_size",
+      "label": "Subheading font size",
+      "type": "number",
+      "default": 32
+    },
+    {
+      "key": "header_layout_type",
+      "label": "Header layout type",
+      "type": "text",
+      "default": "header-above-hero"
+    },
+    {
+      "key": "header_transparent_on_hero",
+      "label": "Transparent header on hero",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "key": "header_sticky",
+      "label": "Sticky header",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "key": "header_cta_text",
+      "label": "Header CTA text",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "header_cta_url",
+      "label": "Header CTA URL",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "slider_layout_type",
+      "label": "Slider layout type",
+      "type": "text",
+      "default": "split"
+    },
+    {
+      "key": "product_detail_layout_type",
+      "label": "Product detail layout type",
+      "type": "text",
+      "default": "gallery-left"
     }
+  ],
+  "referenceDocs": [
+    "README.md",
+    "docs/feature-coverage.md",
+    "docs/template-map.md",
+    "docs/data-objects.md",
+    "docs/platform-surfaces.md",
+    "docs/design-patterns.md"
   ]
 }

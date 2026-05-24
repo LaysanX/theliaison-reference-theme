@@ -31,7 +31,15 @@
       <div class="container">
         <div class="card-grid columns-3">
           {% for field in custom_fields %}
-            <article class="list-card"><strong>{{ field.label }}</strong><p>{{ field.value }}</p></article>
+            <article class="list-card"><strong>{{ field.label }}</strong>{% if field.is_image %}
+              <a class="field-media-thumb" href="{{ field.url }}" target="_blank" rel="noopener">
+                <img src="{{ field.url }}" alt="{{ field.label }}">
+              </a>
+            {% elsif field.is_file %}
+              <p><a href="{{ field.url }}" target="_blank" rel="noopener">{{ field.display_value }}</a></p>
+            {% else %}
+              <p>{{ field.display_value }}</p>
+            {% endif %}</article>
           {% endfor %}
           {% for feature in feature_blocks %}
             <article class="feature-card"><img src="{{ feature.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ feature.title }}"><h3>{{ feature.title }}</h3><p>{{ feature.description }}</p></article>

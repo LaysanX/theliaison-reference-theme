@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header header-layout-{{ settings.header_layout_type | default: 'header-above-hero' }} {% if settings.header_transparent_on_hero %}header-transparent-on-hero{% endif %} {% if settings.header_sticky %}header-sticky{% else %}header-static{% endif %}">
   {% if site.topbar.enabled %}
     <div class="topbar">
       <div class="container topbar-grid">

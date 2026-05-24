@@ -10,16 +10,67 @@
 <body>
   {% render 'sections/header.html' %}
   <main>
-    <section class="section">
-      <div class="container detail-hero">
-        <div class="detail-copy">
-          <span class="eyebrow">Product Detail</span>
-          <h1>{{ product.title }}</h1>
-          <p>{{ product.short_description }}</p>
-        </div>
-        <img src="{{ product.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ product.title }}">
-      </div>
-    </section>
+    {% case settings.product_detail_layout_type %}
+      {% when 'slider-left-content-right' %}
+        <section class="section">
+          <div class="container detail-hero">
+            <div class="detail-media">
+              <img src="{{ product.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ product.title }}">
+              <div class="detail-gallery-strip">
+                {% for item in product.gallery limit: 6 %}
+                  <img src="{{ item.image }}" alt="{{ item.title }}">
+                {% endfor %}
+              </div>
+            </div>
+            <div class="detail-copy">
+              <span class="eyebrow">Product Detail</span>
+              <h1>{{ product.title }}</h1>
+              <p>{{ product.short_description }}</p>
+              <div class="price-row detail-price">
+                {% if product.compare_at_price %}<span class="price-strike">{{ product.compare_at_price }}</span>{% endif %}
+                <strong>{{ product.primary_price | default: product.selling_price | default: product.price }}</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% when 'full-slider-content-below' %}
+        <section class="section">
+          <div class="container">
+            <div class="detail-media detail-media-full">
+              <img src="{{ product.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ product.title }}">
+              <div class="detail-gallery-strip">
+                {% for item in product.gallery limit: 6 %}
+                  <img src="{{ item.image }}" alt="{{ item.title }}">
+                {% endfor %}
+              </div>
+            </div>
+            <div class="detail-copy detail-copy-below">
+              <span class="eyebrow">Product Detail</span>
+              <h1>{{ product.title }}</h1>
+              <p>{{ product.short_description }}</p>
+              <div class="price-row detail-price">
+                {% if product.compare_at_price %}<span class="price-strike">{{ product.compare_at_price }}</span>{% endif %}
+                <strong>{{ product.primary_price | default: product.selling_price | default: product.price }}</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% when 'image-right-content-left' %}
+        <section class="section">
+          <div class="container detail-hero">
+            <div class="detail-copy">
+              <span class="eyebrow">Product Detail</span>
+              <h1>{{ product.title }}</h1>
+              <p>{{ product.short_description }}</p>
+              <div class="price-row detail-price">
+                {% if product.compare_at_price %}<span class="price-strike">{{ product.compare_at_price }}</span>{% endif %}
+                <strong>{{ product.primary_price | default: product.selling_price | default: product.price }}</strong>
+              </div>
+            </div>
+            <img src="{{ product.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ product.title }}">
+          </div>
+        </section>
+    {% endcase %}
     <section class="section muted-section">
       <div class="container content-area">
         {{ product.description_html }}
@@ -32,7 +83,15 @@
       <div class="container">
         <div class="card-grid columns-3">
           {% for field in custom_fields %}
-            <article class="list-card"><strong>{{ field.label }}</strong><p>{{ field.value }}</p></article>
+            <article class="list-card"><strong>{{ field.label }}</strong>{% if field.is_image %}
+              <a class="field-media-thumb" href="{{ field.url }}" target="_blank" rel="noopener">
+                <img src="{{ field.url }}" alt="{{ field.label }}">
+              </a>
+            {% elsif field.is_file %}
+              <p><a href="{{ field.url }}" target="_blank" rel="noopener">{{ field.display_value }}</a></p>
+            {% else %}
+              <p>{{ field.display_value }}</p>
+            {% endif %}</article>
           {% endfor %}
           {% for feature in feature_blocks %}
             <article class="feature-card"><img src="{{ feature.image | default: 'assets/images/placeholder.svg' | asset_url }}" alt="{{ feature.title }}"><h3>{{ feature.title }}</h3><p>{{ feature.description }}</p></article>
