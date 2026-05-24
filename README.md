@@ -35,6 +35,7 @@ This package is also the design reference used by:
 - `docs/data-objects.md`: available data objects and common placeholders
 - `docs/platform-surfaces.md`: public/platform surfaces not currently implemented as uploaded templates
 - `docs/design-patterns.md`: visual composition guide for hero, listings, product detail, collections, cart, checkout, and account pages
+- `docs/release-notes-v2.0.0.md`: short designer-facing release summary for this master reference upgrade
 
 ## Package Structure
 
